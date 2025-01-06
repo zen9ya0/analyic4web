@@ -1,10 +1,13 @@
 from flask import Flask, request, render_template, redirect, url_for
 import subprocess
 import os
+import tempfile
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'uploads'
+# Change the upload folder to a temporary directory
+UPLOAD_FOLDER = os.path.join(tempfile.gettempdir(), 'scanfiletemp')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
